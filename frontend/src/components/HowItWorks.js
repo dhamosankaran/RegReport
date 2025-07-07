@@ -18,7 +18,11 @@ import {
   Server,
   Eye,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  BookOpen,
+  List,
+  Layers,
+  Cog
 } from 'lucide-react';
 import SystemDiagram from './SystemDiagram';
 
@@ -33,6 +37,7 @@ const HowItWorks = () => {
     { id: 'rag-flow', label: 'RAG Vector Embedding Flow', icon: GitBranch },
     { id: 'compliance', label: 'Compliance Checking', icon: Shield },
     { id: 'technical', label: 'Technical Implementation', icon: Code },
+    { id: 'deep-dive', label: 'Technical Deep Dive', icon: BookOpen },
     { id: 'requirements', label: 'Business Requirements', icon: Users }
   ];
 
@@ -958,6 +963,353 @@ const HowItWorks = () => {
     </div>
   );
 
+  const renderTechnicalDeepDive = () => (
+    <div>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Technical Deep Dive</h2>
+      
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-700 rounded-lg text-white p-8 mb-8">
+        <h3 className="text-2xl font-bold mb-4">Advanced Technical Documentation</h3>
+        <p className="text-lg text-indigo-100 mb-4">
+          Comprehensive implementation details for developers and technical teams
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white/10 rounded-lg p-4">
+            <BookOpen className="w-8 h-8 text-indigo-200 mb-3" />
+            <h4 className="font-semibold mb-2">Document Processing Pipeline</h4>
+            <p className="text-sm text-indigo-100">
+              Complete flow from PDF extraction to vector storage with code examples
+            </p>
+          </div>
+          <div className="bg-white/10 rounded-lg p-4">
+            <List className="w-8 h-8 text-indigo-200 mb-3" />
+            <h4 className="font-semibold mb-2">E2E Methods & Functions</h4>
+            <p className="text-sm text-indigo-100">
+              Detailed method list with file locations and execution flow
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <ExpandableSection
+        title="🔄 Document Processing & Chunking Pipeline"
+        id="doc-processing"
+      >
+        <div className="space-y-6 pt-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+              <FileText className="w-5 h-5 mr-2" />
+              Step 1: PDF Text Extraction
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h5 className="font-semibold text-blue-800 mb-2">Method</h5>
+                <code className="text-sm bg-blue-100 p-2 rounded block mb-2">
+                  _extract_pdf_text(file_path: str) → Dict[int, str]
+                </code>
+                <p className="text-sm text-blue-700">
+                  Extracts text from PDF using PyPDF2, organizing content by page numbers
+                </p>
+              </div>
+              <div>
+                <h5 className="font-semibold text-blue-800 mb-2">Configuration</h5>
+                <ul className="text-sm text-blue-700 space-y-1">
+                  <li>• Library: PyPDF2.PdfReader</li>
+                  <li>• Page-by-page extraction</li>
+                  <li>• Empty page filtering</li>
+                  <li>• Error handling per page</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-green-900 mb-4 flex items-center">
+              <Settings className="w-5 h-5 mr-2" />
+              Step 2: Text Cleaning & Normalization
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h5 className="font-semibold text-green-800 mb-2">Method</h5>
+                <code className="text-sm bg-green-100 p-2 rounded block mb-2">
+                  _clean_text(text_by_page: Dict[int, str]) → str
+                </code>
+                <p className="text-sm text-green-700">
+                  Normalizes whitespace, removes special characters, adds page markers
+                </p>
+              </div>
+              <div>
+                <h5 className="font-semibold text-green-800 mb-2">Processing Steps</h5>
+                <ul className="text-sm text-green-700 space-y-1">
+                  <li>• Whitespace normalization (regex: r'\s+')</li>
+                  <li>• Special character removal</li>
+                  <li>• Page marker insertion: [PAGE n]</li>
+                  <li>• Empty content filtering</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-purple-900 mb-4 flex items-center">
+              <Layers className="w-5 h-5 mr-2" />
+              Step 3: Semantic Chunking Strategy
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <h5 className="font-semibold text-purple-800 mb-2">Configuration</h5>
+                <ul className="text-sm text-purple-700 space-y-1">
+                  <li>• Chunk size: 1000 tokens</li>
+                  <li>• Overlap: 200 tokens</li>
+                  <li>• Tokenizer: tiktoken cl100k_base</li>
+                  <li>• Splitter: RecursiveCharacterTextSplitter</li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-semibold text-purple-800 mb-2">Hierarchical Separators</h5>
+                <ul className="text-sm text-purple-700 space-y-1">
+                  <li>• "\n\n" (Paragraph breaks)</li>
+                  <li>• "\n" (Line breaks)</li>
+                  <li>• ". " (Sentence endings)</li>
+                  <li>• "? ", "! " (Question/Exclamation)</li>
+                  <li>• "; ", ", " (Punctuation)</li>
+                  <li>• " " (Word boundaries)</li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-semibold text-purple-800 mb-2">Chunk Types</h5>
+                <ul className="text-sm text-purple-700 space-y-1">
+                  <li>• regulatory_rule</li>
+                  <li>• procedure</li>
+                  <li>• requirement</li>
+                  <li>• definition</li>
+                  <li>• example</li>
+                  <li>• schedule</li>
+                  <li>• general</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-orange-900 mb-4 flex items-center">
+              <Brain className="w-5 h-5 mr-2" />
+              Step 4: Vector Embeddings & Storage
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h5 className="font-semibold text-orange-800 mb-2">OpenAI Embeddings</h5>
+                <ul className="text-sm text-orange-700 space-y-1">
+                  <li>• Model: text-embedding-3-small</li>
+                  <li>• Dimensions: 1536</li>
+                  <li>• Batch processing for efficiency</li>
+                  <li>• Rate limiting and error handling</li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-semibold text-orange-800 mb-2">PostgreSQL Storage</h5>
+                <ul className="text-sm text-orange-700 space-y-1">
+                  <li>• Extension: pgvector</li>
+                  <li>• Vector column: Vector(1536)</li>
+                  <li>• Indexing: HNSW for fast search</li>
+                  <li>• Metadata: JSON storage</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ExpandableSection>
+
+      <ExpandableSection
+        title="🔍 Complete E2E Methods & File Structure"
+        id="e2e-methods"
+      >
+        <div className="space-y-6 pt-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <Code className="w-5 h-5 mr-2" />
+              File: backend/app/services/document_processor.py
+            </h4>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded border">
+                <h5 className="font-semibold text-gray-800 mb-2">DocumentProcessor Class Methods</h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>1. <code>__init__(max_chunk_size, chunk_overlap)</code></li>
+                      <li>2. <code>_tiktoken_length(text: str) → int</code></li>
+                      <li>3. <code>process_pdf(file_path: str) → List[DocumentChunk]</code> 🎯</li>
+                      <li>4. <code>_extract_pdf_text(file_path: str) → Dict[int, str]</code> 📖</li>
+                      <li>5. <code>_clean_text(text_by_page) → str</code> 🧹</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>6. <code>_create_semantic_chunks(document) → List[DocumentChunk]</code> ✂️</li>
+                      <li>7. <code>_classify_chunk_type(content: str) → str</code> 🏷️</li>
+                      <li>8. <code>process_multiple_pdfs(file_paths) → List[DocumentChunk]</code></li>
+                      <li>9. <code>get_chunk_statistics(chunks) → Dict[str, Any]</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+              <Database className="w-5 h-5 mr-2" />
+              File: backend/app/services/vector_service.py
+            </h4>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded border">
+                <h5 className="font-semibold text-blue-800 mb-2">PostgreSQLVectorService Class Methods</h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <ul className="text-sm text-blue-700 space-y-1">
+                      <li>10. <code>__init__(embedding_model)</code></li>
+                      <li>11. <code>_get_file_hash(file_path: str) → str</code> 🔍</li>
+                      <li>12. <code>initialize_database()</code> 🚀</li>
+                      <li>13. <code>_process_initial_documents()</code></li>
+                      <li>14. <code>_add_documents_if_changed(file_paths)</code></li>
+                      <li>15. <code>_generate_embeddings(texts) → List[List[float]]</code> 🧠</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="text-sm text-blue-700 space-y-1">
+                      <li>16. <code>add_documents(file_paths) → Dict[str, Any]</code> 💾</li>
+                      <li>17. <code>search_similar_documents(query) → List[Dict]</code> 🔍</li>
+                      <li>18. <code>hybrid_search(query, n_results) → List[Dict]</code> 🔀</li>
+                      <li>19. <code>get_document_status() → DocumentsStatus</code></li>
+                      <li>20. <code>reload_documents()</code></li>
+                      <li>21. <code>debug_top_chunks(query) → list</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-green-900 mb-4 flex items-center">
+              <Brain className="w-5 h-5 mr-2" />
+              File: backend/app/services/rag_service.py
+            </h4>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded border">
+                <h5 className="font-semibold text-green-800 mb-2">RAGService Class Methods</h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <ul className="text-sm text-green-700 space-y-1">
+                      <li>22. <code>__init__(vector_service)</code></li>
+                      <li>23. <code>check_compliance(concern, context) → ComplianceResponse</code> 🎯</li>
+                      <li>24. <code>_retrieve_relevant_documents(concern) → List[Dict]</code> 📋</li>
+                      <li>25. <code>_generate_compliance_response(concern) → dict</code> 🧠</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="text-sm text-green-700 space-y-1">
+                      <li>26. <code>_format_retrieved_content(docs) → str</code></li>
+                      <li>27. <code>_parse_llm_response(response) → ComplianceResponse</code></li>
+                      <li>28. <code>_create_fallback_response(response) → Dict</code></li>
+                      <li>29. <code>get_service_status() → Dict[str, Any]</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-purple-900 mb-4 flex items-center">
+              <Server className="w-5 h-5 mr-2" />
+              File: backend/app/main.py - FastAPI Endpoints
+            </h4>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded border">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h5 className="font-semibold text-purple-800 mb-2">Application Lifecycle</h5>
+                    <ul className="text-sm text-purple-700 space-y-1">
+                      <li>30. <code>lifespan(app: FastAPI)</code> 🚀</li>
+                      <li>31. <code>root()</code></li>
+                      <li>32. <code>health_check()</code></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-purple-800 mb-2">API Endpoints</h5>
+                    <ul className="text-sm text-purple-700 space-y-1">
+                      <li>33. <code>check_compliance(query: ComplianceQuery)</code> 🎯</li>
+                      <li>34. <code>get_document_status()</code></li>
+                      <li>35. <code>reload_documents()</code></li>
+                      <li>36. <code>debug_top_chunks(query, n_results)</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <h4 className="text-lg font-semibold text-yellow-900 mb-4 flex items-center">
+              <Workflow className="w-5 h-5 mr-2" />
+              Complete E2E Execution Flow
+            </h4>
+            <div className="bg-white p-4 rounded border">
+              <div className="space-y-4">
+                <div>
+                  <h5 className="font-semibold text-yellow-800 mb-2">1. Application Startup</h5>
+                  <code className="text-sm bg-yellow-100 p-2 rounded block">
+                    lifespan() → initialize_database() → _process_initial_documents() → add_documents()
+                  </code>
+                </div>
+                <div>
+                  <h5 className="font-semibold text-yellow-800 mb-2">2. PDF Processing Pipeline</h5>
+                  <code className="text-sm bg-yellow-100 p-2 rounded block">
+                    process_pdf() → _extract_pdf_text() → _clean_text() → _create_semantic_chunks() → _classify_chunk_type()
+                  </code>
+                </div>
+                <div>
+                  <h5 className="font-semibold text-yellow-800 mb-2">3. Vector Embedding & Storage</h5>
+                  <code className="text-sm bg-yellow-100 p-2 rounded block">
+                    _generate_embeddings() → [Store in PostgreSQL with pgvector]
+                  </code>
+                </div>
+                <div>
+                  <h5 className="font-semibold text-yellow-800 mb-2">4. Compliance Checking Pipeline</h5>
+                  <code className="text-sm bg-yellow-100 p-2 rounded block">
+                    check_compliance() → _retrieve_relevant_documents() → hybrid_search() → _generate_compliance_response()
+                  </code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ExpandableSection>
+
+      <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6 mt-8">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Technical Specifications</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600 mb-1">1000</div>
+            <div className="text-sm text-gray-600">Tokens per chunk</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600 mb-1">200</div>
+            <div className="text-sm text-gray-600">Token overlap</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-600 mb-1">1536</div>
+            <div className="text-sm text-gray-600">Vector dimensions</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-orange-600 mb-1">49</div>
+            <div className="text-sm text-gray-600">Total methods</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderRequirements = () => (
     <div>
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Business Requirements & Use Cases</h2>
@@ -1116,6 +1468,7 @@ const HowItWorks = () => {
       case 'rag-flow': return renderRAGFlow();
       case 'compliance': return renderCompliance();
       case 'technical': return renderTechnical();
+      case 'deep-dive': return renderTechnicalDeepDive();
       case 'requirements': return renderRequirements();
       default: return renderOverview();
     }
