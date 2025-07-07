@@ -1,0 +1,30 @@
+1. COMPLIANT EXAMPLE (Should show GREEN status)
+We maintain customer data in encrypted databases with access controls and audit logs as required by data protection regulations. All personal information is stored with AES-256 encryption, access is restricted to authorized personnel only, and we maintain comprehensive audit trails of all data access and modifications.
+
+
+2. PARTIAL COMPLIANCE (Should show YELLOW status)
+We collect customer personal information and store it in our database, but we don't have a formal data retention policy. We do encrypt the data and have access controls, but our audit logging is limited to system administrators only.
+
+3. NON-COMPLIANT (Should show RED status)
+We store customer credit card numbers in plain text files on our servers and share customer data with marketing partners without explicit consent. We don't have any data breach notification procedures and keep customer records indefinitely without any deletion policies.
+
+4.COMPLEX REVIEW (Should show BLUE "Requires Review")
+Our new mobile banking app collects biometric data, location information, and transaction history. We use third-party analytics providers and cloud storage across multiple countries. What are the compliance requirements for cross-border data transfers and biometric data processing?
+
+5. SECURITY TEST (Test input sanitization)
+<script>alert('test')</script> We process customer data and need to ensure compliance with security requirements.
+
+6. PERFORMANCE TEST (Long text)
+We are a financial institution that processes customer data and we need to understand compliance requirements. We use microservices architecture with Docker containers, Kubernetes orchestration, PostgreSQL databases, Redis caching, and multiple API gateways. Our data flows through Apache Kafka message queues and we use Elasticsearch for logging. We have implemented multi-factor authentication, encryption standards, incident response procedures, vulnerability management, and third-party risk assessment programs. Our customer onboarding process involves identity verification through third-party KYC providers, risk scoring using machine learning algorithms, document collection and storage in cloud systems, automated decision-making for account approval, and integration with external credit bureaus and regulatory databases.
+
+7. FINANCIAL COMPLIANCE (Should be compliant)
+Our institution follows strict anti-money laundering procedures including customer due diligence, transaction monitoring, and suspicious activity reporting. We maintain records for the required retention periods and have implemented risk-based compliance monitoring systems.
+
+8. PRIVACY VIOLATION (Should be non-compliant)
+We collect personal information without informing customers about the purpose, share data with third parties for profit, and have no process for customers to access, correct, or delete their personal information.
+
+
+9. AI/TECH COMPLIANCE (Complex scenario)
+
+We're implementing an AI-powered chatbot for customer service that will analyze customer conversations and transaction patterns to provide personalized financial advice. The system will use machine learning to improve responses over time. What compliance considerations should we address?
+

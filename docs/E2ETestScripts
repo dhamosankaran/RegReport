@@ -1,0 +1,12 @@
+# Run all tests
+./scripts/run-all-tests.sh
+
+# Run specific test categories
+./scripts/run-all-tests.sh -b  # Backend only
+./scripts/run-all-tests.sh -f  # Frontend only
+./scripts/run-all-tests.sh -e  # E2E only
+./scripts/run-all-tests.sh -p  # Performance only
+./scripts/run-all-tests.sh -s  # Security only
+
+# Run multiple categories
+./scripts/run-all-tests.sh -b -f -e  # Backend, Frontend, and E2E

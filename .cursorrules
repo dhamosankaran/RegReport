@@ -1,0 +1,355 @@
+# RegReportRAG - AI Assistant Rules
+
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g., version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again.
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
+
+# Project Overview
+
+This project is a **Regulatory Report RAG (Retrieval-Augmented Generation) System** that processes regulatory documents, extracts relevant information, and generates compliance reports using AI-powered document analysis.
+
+## Core Features
+* **Document Processing**: Automated regulatory document ingestion and processing
+* **RAG Integration**: Retrieval-augmented generation for accurate report creation
+* **Compliance Checking**: Automated compliance validation and reporting
+* **Vector Search**: Semantic search capabilities for regulatory content
+* **API Integration**: RESTful API for document processing and report generation
+* **Frontend Interface**: React-based user interface for document management
+
+## Technical Architecture
+* **Backend**: FastAPI (Python)
+* **Frontend**: React with TypeScript
+* **Database**: PostgreSQL (with pgvector) for vector storage and semantic search
+* **AI/ML**: RAG system with document embeddings
+* **Document Processing**: PDF and text document parsing
+* **Vector Database**: PostgreSQL (pgvector) for semantic search
+
+# Project-Specific Rules
+
+1. **File and Directory Structure:**
+```
+RegReportRAG/
+├── backend/
+│   ├── app/
+│   │   ├── main.py              # FastAPI application entry point
+│   │   ├── models/              # Database models and schemas
+│   │   ├── services/            # Business logic and services
+│   │   └── utils/               # Utility functions
+│   ├── data/                    # Data storage (ChromaDB)
+│   ├── logs/                    # Application logs
+│   └── requirements.txt         # Python dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── components/          # React components
+│   │   ├── services/            # API service layer
+│   │   └── App.js               # Main React application
+│   ├── public/                  # Static assets
+│   └── package.json             # Node.js dependencies
+├── docs/                        # Documentation
+├── data/                        # Shared data directory
+├── logs/                        # Application logs
+└── docker-compose.yml           # Docker configuration
+```
+
+2. **API Keys and Environment Variables:**
+* Store API keys in `.env` files (use `.env.example` as template)
+* Use `python-dotenv` for environment variable management
+* Example `.env.example`:
+```
+OPENAI_API_KEY=
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+```
+**CRITICAL: NEVER COMMIT .ENV FILES TO GIT**
+
+3. **Document Processing:**
+* Support PDF and text document formats
+* Implement proper document validation
+* Handle large file uploads efficiently
+* Extract text content for RAG processing
+* Store document metadata in PostgreSQL
+
+4. **RAG System Implementation:**
+* Use PostgreSQL (with pgvector) for vector storage
+* Implement document chunking strategies
+* Create semantic embeddings for document sections
+* Build retrieval mechanisms for relevant content
+* Generate context-aware responses
+
+5. **Database Management:**
+* Use PostgreSQL for structured data and vector embeddings
+* Implement proper database migrations
+* Handle database connections efficiently
+* Backup and recovery procedures
+
+6. **API Design:**
+* RESTful API endpoints
+* Proper HTTP status codes
+* Request/response validation with Pydantic
+* Error handling and logging
+* API documentation with OpenAPI/Swagger
+
+7. **Frontend Development:**
+* React with TypeScript
+* Component-based architecture
+* Responsive design principles
+* State management best practices
+* API integration patterns
+
+8. **Error Handling:**
+* Comprehensive error handling at all layers
+* Informative error messages
+* Proper logging with different levels
+* Graceful degradation
+* User-friendly error displays
+
+9. **Testing:**
+* Unit tests for all components
+* Integration tests for API endpoints
+* Frontend component testing
+* End-to-end testing scenarios
+* Mock external dependencies
+
+10. **Security:**
+* Input validation and sanitization
+* SQL injection prevention
+* XSS protection
+* CORS configuration
+* Authentication and authorization
+
+# Tools and Technologies
+
+* **Backend**: Python, FastAPI, Pydantic, SQLAlchemy
+* **Frontend**: React, TypeScript, Tailwind CSS
+* **Database**: PostgreSQL
+* **Document Processing**: PyPDF2, python-docx
+* **AI/ML**: OpenAI API, sentence-transformers
+* **Testing**: pytest, pytest-asyncio, React Testing Library
+* **Documentation**: Markdown, OpenAPI/Swagger
+* **Deployment**: Docker, Docker Compose
+
+# Communication Guidelines
+
+1. **User Profile:**
+   - Target Audience: Developers and compliance professionals
+   - Technical Level: Intermediate to advanced
+   - Goals: Build a robust regulatory document processing system
+   - Pain Points: Complex document processing, compliance requirements
+
+2. **Communication Style:**
+   - Use clear, technical language
+   - Provide detailed explanations for complex concepts
+   - Include code examples and documentation
+   - Explain architectural decisions
+   - Offer best practices and recommendations
+
+# Code Generation Rules
+
+1. **Backend Code:**
+   - Follow FastAPI best practices
+   - Use type hints throughout
+   - Implement proper error handling
+   - Add comprehensive logging
+   - Use Pydantic for data validation
+
+2. **Frontend Code:**
+   - Follow React best practices
+   - Use TypeScript for type safety
+   - Implement responsive design
+   - Handle loading and error states
+   - Use proper state management
+
+3. **Database Code:**
+   - Use SQLAlchemy ORM patterns
+   - Implement proper migrations
+   - Handle database transactions
+   - Optimize queries for performance
+   - Use connection pooling
+
+# Security Guidelines
+
+1. **API Security:**
+   - Validate all inputs
+   - Implement rate limiting
+   - Use HTTPS in production
+   - Handle sensitive data properly
+   - Implement proper authentication
+
+2. **Data Security:**
+   - Encrypt sensitive data
+   - Implement proper access controls
+   - Regular security audits
+   - Backup and recovery procedures
+   - Compliance with data protection regulations
+
+# Performance Guidelines
+
+1. **Backend Performance:**
+   - Optimize database queries
+   - Implement caching strategies
+   - Use async/await patterns
+   - Monitor resource usage
+   - Profile application performance
+
+2. **Frontend Performance:**
+   - Optimize bundle size
+   - Implement lazy loading
+   - Use efficient rendering patterns
+   - Minimize API calls
+   - Optimize images and assets
+
+# Testing Guidelines
+
+1. **Test Coverage:**
+   - Unit tests for all business logic
+   - Integration tests for API endpoints
+   - Frontend component testing
+   - End-to-end testing scenarios
+   - Performance testing
+
+2. **Test Quality:**
+   - Meaningful test names
+   - Clear test descriptions
+   - Proper test isolation
+   - Mock external dependencies
+   - Test edge cases and error conditions
+
+# Documentation Requirements
+
+1. **Code Documentation:**
+   - Comprehensive docstrings
+   - API documentation
+   - Architecture diagrams
+   - Setup and deployment guides
+   - Troubleshooting documentation
+
+2. **User Documentation:**
+   - User guides and tutorials
+   - API reference documentation
+   - Configuration guides
+   - Best practices documentation
+   - FAQ and troubleshooting
+
+# Lessons Learned
+
+* **API Keys**: Always use environment variables for API keys. Never commit API keys to version control.
+* **Git Security**: When API keys are accidentally committed to git history, use git filter-repo to completely remove sensitive data from GitHub. Always enhance .gitignore to prevent future exposures.
+* **Emergency API Key Procedures**: If API keys are exposed in git history: 1) Immediately revoke the exposed key, 2) Create new API key, 3) Use git filter-repo to completely rewrite git history, 4) Force push to replace remote history, 5) Clear local reflog and run aggressive garbage collection, 6) Enhance .gitignore with comprehensive exclusions.
+* **Document Processing**: Implement proper document validation and error handling for various file formats.
+* **Vector Database**: Use PostgreSQL efficiently with proper chunking and embedding strategies.
+* **RAG Implementation**: Ensure proper context retrieval and response generation for accurate results.
+* **Database Management**: Implement proper migrations and backup procedures for PostgreSQL.
+* **Frontend State Management**: Handle complex state updates and API interactions properly.
+* **Error Handling**: Implement comprehensive error handling at all layers with proper user feedback.
+* **Testing**: Write thorough tests for document processing, RAG functionality, and API endpoints.
+* **Performance**: Optimize document processing and vector search for large document collections.
+* **Security**: Follow security best practices for handling sensitive regulatory documents.
+* **Technical Documentation**: When explaining complex systems like RAG, provide both high-level overviews and detailed technical specifications. Use interactive elements, visual diagrams, and real-world examples to make technical concepts accessible. Break down complex processes into digestible steps with expandable sections for those who want deeper understanding.
+
+# Scratchpad
+
+Current Task: [X] RAG Vector Embedding Flow Documentation
+Project Status: Completed
+
+## Task: RAG Vector Embedding Flow Documentation ✅
+
+### Overview
+Successfully created comprehensive documentation explaining the RAG vector embedding process from document chunking to retrieval and AI analysis. Added a dedicated section to the "How It Works" page that provides detailed explanations for:
+- Document chunking strategies with technical specifications
+- Semantic content classification system
+- Vector embedding generation using OpenAI's text-embedding-3-small
+- PostgreSQL pgvector database storage and indexing
+- Query processing and semantic search mechanisms
+- AI analysis and structured response generation
+- Complete end-to-end workflow with real-world examples
+
+### Implementation Plan
+
+#### Phase 1: Understanding Current Implementation [X]
+[X] Analyzed backend services (rag_service.py, vector_service.py, document_processor.py)
+[X] Reviewed current chunking strategy (1000 tokens, 200 overlap)
+[X] Examined vector embedding process (OpenAI text-embedding-3-small, 1536 dimensions)
+[X] Studied PostgreSQL pgvector database schema and operations
+[X] Understood query processing and retrieval mechanisms
+
+#### Phase 2: Content Creation [X]
+[X] Created comprehensive RAG flow explanation section
+[X] Added detailed step-by-step breakdown of the process
+[X] Included technical specifications and parameters
+[X] Provided real-world examples and use cases
+[X] Added expandable sections for detailed exploration
+[X] Created visual flow diagrams and technical details
+
+#### Phase 3: Frontend Integration [X]
+[X] Added new "RAG Vector Embedding Flow" section to navigation
+[X] Implemented expandable sections for detailed content
+[X] Created interactive flow diagrams
+[X] Added code examples and database schema visualization
+[X] Integrated with existing HowItWorks component structure
+
+#### Phase 4: Visual Documentation [X]
+[X] Created comprehensive Mermaid diagram showing complete RAG flow
+[X] Added color-coded sections for different pipeline stages
+[X] Included database schema visualization
+[X] Provided technical specification boxes and highlights
+
+### Technical Details Documented
+
+#### Document Processing:
+- Chunk size: 1000 tokens with 200 token overlap
+- RecursiveCharacterTextSplitter with hierarchical splitting
+- Semantic content classification (regulatory_rule, procedure, requirement, etc.)
+- MD5 hash-based change detection
+
+#### Vector Embeddings:
+- OpenAI text-embedding-3-small model
+- 1536-dimensional vectors
+- Cosine similarity for semantic matching
+- PostgreSQL pgvector storage with HNSW indexing
+
+#### Query Processing:
+- Hybrid search combining semantic similarity and metadata filtering
+- Top-k retrieval with relevance scoring
+- Context assembly for AI analysis
+- Structured response generation with GPT-4
+
+### User Experience Enhancements:
+- Interactive expandable sections for detailed exploration
+- Code examples and database schema visualization
+- Real-world compliance checking examples
+- Technical specifications and performance metrics
+- Visual flow diagrams and process illustrations
+
+# Progress Tracking
+- [X] Project initialization
+- [X] Basic setup complete
+- [X] Core features implemented
+- [X] Advanced features completed
+- [X] E2E Testing Suite Implementation
+- [X] RAG Vector Embedding Flow Documentation
+- [X] Documentation finished
+- [ ] Ready for deployment
+
+# Next Steps
+1. ✅ Complete E2E testing suite implementation
+2. ✅ Set up CI/CD pipeline with testing
+3. ✅ Create comprehensive test documentation
+4. ✅ Document RAG vector embedding flow
+5. Prepare for production deployment
+
+# Notes
+- Created comprehensive user-friendly documentation for RAG system
+- Explained complex technical concepts in accessible language
+- Provided both high-level overview and detailed technical specifications
+- Added interactive elements for better user engagement
+- Included practical examples and use cases for better understanding
+- Documented all technical parameters and implementation details 
