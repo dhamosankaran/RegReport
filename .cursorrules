@@ -256,11 +256,12 @@ POSTGRES_PASSWORD=
 * **Technical Documentation**: When explaining complex systems like RAG, provide both high-level overviews and detailed technical specifications. Use interactive elements, visual diagrams, and real-world examples to make technical concepts accessible. Break down complex processes into digestible steps with expandable sections for those who want deeper understanding.
 * **Multi-Model AI Integration**: Successfully implemented alternative AI provider support with Google Gemini for both embeddings and LLM processing. Key considerations: 1) Use task-specific embedding types (retrieval_document vs retrieval_query), 2) Configure appropriate safety settings for LLM models, 3) Handle API rate limits and quotas, 4) Maintain backward compatibility with existing PostgreSQL vector storage, 5) Implement comprehensive testing for both embedding generation and RAG functionality.
 * **Google Generative AI Import Fix**: The google-generativeai library (version 0.3.2) does not support direct import of embed function. Use `import google.generativeai as genai` and call `genai.embed_content()` instead of `from google.generativeai import embed`. The correct API structure is: `genai.embed_content(model=model, content=text, task_type="retrieval_document")` for document embeddings and `task_type="retrieval_query"` for query embeddings.
+* **Multi-Model Vector Database Support**: When using different AI providers (OpenAI vs Gemini), create separate database tables for different embedding dimensions. OpenAI embeddings are 1536 dimensions while Gemini embeddings are 768 dimensions. Solution: Create provider-specific database models (e.g., `document_chunks` for OpenAI, `gemini_document_chunks` for Gemini) to avoid dimension mismatch errors. This allows both embedding types to coexist in the same PostgreSQL database with pgvector extension.
 
 # Scratchpad
 
-Current Task: [X] Gemini Vector Service Implementation - COMPLETED ✅
-Project Status: Multi-model AI integration complete with Google Gemini support!
+Current Task: [X] Gemini CLI Testing & Vector Dimension Fix - COMPLETED ✅
+Project Status: Multi-model AI integration complete with Google Gemini support and full CLI testing!
 
 ## Task: Standalone PDF Loader Implementation ✅
 
@@ -375,6 +376,14 @@ from vector_service_gemini import GeminiVectorService
 - **LLM Models**: gemini-1.5-flash for fast responses
 - **API Management**: Proper quota and rate limit handling
 - **Cross-Platform**: Works with same database as OpenAI implementation
+
+### CLI Testing Completion ✅
+- **Vector Dimension Fix**: Created separate `gemini_document_chunks` table for 768D embeddings
+- **Environment Loading**: Fixed .env file loading in CLI for proper API key access
+- **Full Pipeline Testing**: Successfully tested document loading, RAG queries, and semantic search
+- **Test Document Creation**: Generated regulatory PDFs (Compliance Guide, Risk Management Policy, Data Governance Manual)
+- **CLI Commands Working**: All CLI commands functional - load, query, search, status, clear, interactive
+- **Database Coexistence**: Gemini (768D) and OpenAI (1536D) embeddings work in same PostgreSQL database
 
 # Progress Tracking
 - [X] Project initialization
