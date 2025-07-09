@@ -20,8 +20,10 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # Import from the existing app structure
 from app.models.schemas import DocumentStatus, DocumentsStatus
-from app.models.database import create_session_factory, DocumentChunk as DBDocumentChunk, init_database
 from app.utils.logging_config import get_logger
+
+# Import Gemini-specific database model
+from gemini_database import create_session_factory, GeminiDocumentChunk as DBDocumentChunk, init_gemini_database
 
 # Import the Gemini-specific document processor
 from gemini_document_processor import GeminiDocumentProcessor, DocumentChunk
@@ -96,8 +98,8 @@ class GeminiVectorService:
         """Initialize PostgreSQL database with pgvector extension"""
         try:
             # Initialize database tables and pgvector extension
-            init_database()
-            logger.info("Initialized PostgreSQL database with pgvector extension")
+            init_gemini_database()
+            logger.info("Initialized PostgreSQL database with pgvector extension (Gemini table)")
             
         except Exception as e:
             logger.error(f"Error initializing PostgreSQL database: {str(e)}")
@@ -262,7 +264,7 @@ ANSWER:"""
                     document_name,
                     page_number,
                     1 - (embedding <=> CAST(:query_vector AS vector)) as similarity_score
-                FROM document_chunks
+                FROM gemini_document_chunks
                 """
                 params = {"query_vector": query_vector}
                 conditions = []

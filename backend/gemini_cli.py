@@ -13,6 +13,10 @@ from typing import List, Optional
 import json
 from datetime import datetime
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # Add the backend directory to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
